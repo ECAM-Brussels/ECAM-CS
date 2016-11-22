@@ -1,0 +1,228 @@
+\documentclass[a4paper,11pt,final]{article}
+
+% Packages
+\usepackage[french]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{vmargin}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{tikz,pgf}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{microtype}
+\usepackage{background}
+
+% Marges
+\setpapersize[landscape]{A4}
+\setmargins{3cm}{0cm}{25.5cm}{17cm}{0cm}{2cm}{0cm}{0cm}
+
+% Style
+\pagestyle{empty}
+\urlstyle{sf}
+\setlength{\parindent}{0mm}
+
+% Couleurs
+\definecolor{ecamorange}{rgb}{0.92,0.45,0.02} % #ec7405
+\definecolor{ecamred}{rgb}{0.68,0.06,0.28} % #ae0f48
+
+%%% Style des listings
+\lstdefinelanguage{bash}
+{morekeywords=[1]{git},
+morekeywords=[2]{origin},
+morekeywords=[3]{config,clone,push},
+morestring=[b]{"},}
+
+\lstset{basicstyle=\scriptsize\tt}
+\lstset{keywordstyle=[1]\color[rgb]{0,0,1}\bfseries}
+\lstset{keywordstyle=[2]\color[rgb]{0.6,0,0}\bfseries}
+\lstset{keywordstyle=[3]\color[rgb]{0,0.6,0}\bfseries}
+\lstset{identifierstyle=\color{black}}
+\lstset{commentstyle=\color[rgb]{0,0.6,0.6}}
+\lstset{stringstyle=\color[rgb]{0.44,0.47,1}}
+\lstset{showstringspaces=false}
+\lstset{showtabs=false}
+\lstset{tabsize=3}
+\lstset{extendedchars=true}
+\lstset{breaklines=true}
+\lstset{postbreak={}}
+\lstset{breakautoindent=true}
+\lstset{breakindent=0pt}
+\lstset{xleftmargin=0.1cm}
+\lstset{xrightmargin=1mm}
+\lstset{frame=tblr,rulecolor=\color[gray]{.4}}
+\lstset{captionpos=b}
+\lstset{aboveskip=0.5cm,belowskip=0cm}
+\lstset{numbers=left}
+\lstset{numberstyle=\tiny}
+\lstset{columns=fixed}
+\lstset{escapechar=§}
+\lstset{language=python}
+
+% Nouvelles commandes
+\newcommand{\code}[1]{{\small\texttt{#1}}}
+
+% Début du document
+
+%Template du document ce repetant sur chaque page
+\backgroundsetup
+{
+scale=1,
+angle=0,
+opacity=1,
+hshift=-265,
+vshift=320,
+contents={\begin{tikzpicture}[overlay]
+		\draw[draw=none,fill=ecamorange] (-3.5,2) rectangle (-0.9,-20);
+		\node at (-2,1) {\includegraphics[width=2cm]{ECAM-logo.pdf}};
+		\node[rotate=90,scale=2.5,color=white] at (-2,-15.5) {\sf\bfseries Cheat Sheet};
+		\node[scale=2,color=ecamred,anchor=west] at (-0.3,0.8) {\sf\bfseries Commandes Bash de base};
+		\node at (25.5,-18.75) {\includegraphics[width=2cm]{by-nc-nd.pdf}};
+\end{tikzpicture}}
+}
+
+\begin{document}
+	\begin{multicols}{2}
+	
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+			\multicolumn{2}{l}{{\Large\color{ecamred}\sf Général}\medskip}\\						
+			clear & efface le contenu de la fenêtre \\[1mm]
+			history & affiche l'historique des dernières commandes \\[1mm]
+			exit & quitte le terminal
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+			\multicolumn{2}{l}{{\Large\color{ecamred}\sf Information système}\medskip}\\			
+			whoami & affiche l'identité de l'utilisateur courant \\[1mm]
+			uptime & information sur la durée de fonctionnement \\[1mm]
+			date & affiche la date courante \\[1mm]
+			cal & affiche le calendrier du mois courant \\[1mm]
+			man <cmd> & affiche l'aide de la commande \code{cmd} \\
+			& (\textit{quitter l'aide avec la touche \code{q}}) \\[1mm]
+			uname -a & information sur le système d'exploitation \\[1mm]
+			w & liste les utilisateurs connectés \\[1mm]
+			df & affiche l'utilisation des disques \\
+			|\quad df -h & tailles lisibles par un humain
+		\end{tabular}
+
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+			\multicolumn{2}{l}{{\Large\color{ecamred}\sf Navigation}\bigskip}\\
+			pwd & affiche le dossier courant \\[2mm]
+			ls & liste le contenu du dossier courant \\
+			|\quad ls <path> & liste le contenu du dossier \code{path} \\
+			|\quad ls -a & affiche tous les fichiers et dossiers \\
+			|\quad ls -lh & liste détaillée et tailles lisibles par un humain \\[2mm]
+			cd & renvoi à votre répertoire de connexion\\			
+			|\quad cd <path> & change le dossier courant en \code{path} \\
+			|\quad cd .. & remonte dans le dossier parent
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+		 	\multicolumn{2}{l}{{\Large\color{ecamred}\sf Affichage du contenu d'un fichier}\medskip}\\
+			cat <path> & affiche le contenu du fichier \code{path} \\[2mm]
+			more <path> & permet l'affichage page par page du fichier \code{path} incluant une navigation basique \\[2mm]
+			less <path> & idem \code{more }\code{path} mais incluant une navigation plus complète \\[2mm]
+			head <path> & affiche les 10 premières lignes du fichier \code{path} \\
+			|\quad head -n <nb> <path> & affiche les \code{nb} premières lignes du fichier \code{path} \\[2mm]
+			tail <path> & affiche les 10 dernières lignes du fichier \code{path} \\
+			|\quad tail -n <nb> <path> & affiche les \code{nb} dernières lignes du fichier \code{path}
+		\end{tabular}	
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -		
+		
+
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+			\multicolumn{2}{l}{{\Large\color{ecamred}\sf Manipulation de fichiers}\medskip}\\
+			mkdir <path> & crée un nouveau dossier \code{path} \\[2mm]
+			touch <path> & crée un nouveau fichier vide \code{path} \\[2mm]
+			cp <path1> <path2> & copie le fichier \code{path1} vers le fichier \code{path2} \\
+			|\quad cp <path1> <path2>/ & copie le fichier \code{path1} dans le dossier \code{path2} \\
+			|\quad cp -R <path1> <path2> & copie le dossier \code{path1} vers le dossier \code{path2} \\[2mm]
+			mv & (lorsque \code{path2} existe déjà)\\
+			|\quad mv <path1> <path2>/ & déplace le fichier \code{path1} dans le dossier \code{path2} \\
+			|\quad mv <path1> <path2> & écrase le fichier \code{path2} par \code{path1} \\
+			|\quad mv <path1> <path2> & déplace le dossier \code{path1} dans \code{path2} \\[2mm]
+			mv & (lorsque \code{path2} n'existe pas)\\
+			|\quad mv <path1> <path2> & renomme le fichier ou dossier \code{path1} en \code{path2} \\	[2mm]
+			rmdir <path> & supprime le dossier \code{path} si celui-ci est vide\\[2mm]
+			rm <path> & supprime le fichier \code{path} \\
+			|\quad rm -i <path> & demande confirmation avant suppression \\
+			|\quad rm -R <path> & supprime le dossier \code{path} \\[2mm]
+			find <path> -name <name> & cherche le fichier \code{name} dans le dossier \code{path}
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Gestion des permissions}\medskip}\\	
+		chmod & permet de changer les permissions d'un fichier\\[1mm]
+		|\quad chmod +w <path> & ajoute les droits en écriture au fichier \code{path} à tout les utilisateur\\
+		|\quad chmod g-x <path> & retire les droits d'exécution au fichier \code{path} pour le groupe seulement\\
+	 	 |\quad chmod UGA <path> & définit touts les droits sous forme octal au fichier \code{path} (ex : chmod 755 <path>)
+	 	 \begin{itemize}
+	 	 \item U : droits de l'utilisateur
+	 	 \item G : droits du groupe
+	 	 \item	 A : droits des autres
+		\end{itemize}	 	  \\
+		chown & permet de changer le propriétaire d'un fichier\\[2mm]
+		chgrp & permet de changer le groupe auxquelles appartient le fichier\\
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -		
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Redirection}\medskip}\\	
+		<cmd> > <path> & redirige le sortie standard de la commande \code{cmd} vers le fichier \code{path}\\
+		<cmd> ?> <path> & redirige la sortie standard \textbf{et} la sortie d'erreurs de la commande \code{cmd} vers le fichier 				\code{path}\\
+		<cmd> 1> <path1> 2> <path2>& redirige la sortie standard vers le fichier \code{path1} et la sortie d'erreurs vers le fichier 		\code{path2}\\
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Gestion des processus}\medskip}\\			
+			ps & liste statique des processus en cours d'exécution de l'utilisateur courant \\
+			|\quad ps -a & liste les processus de tous les utilisateurs \\
+			|\quad ps -e & liste tous les processus \\
+			|\quad ps -f & affiche toutes les informations des processus \\[2mm]
+			top & liste dynamique des processus en cours d'exécution (\textit{quitter la liste avec la touche \code{q}}) \\[2mm]
+			kill <pid> & tue le processus numéro \code{pid} \\
+			|\quad kill -9 <pid> & tue violemment le processus \\
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+			\multicolumn{2}{l}{{\Large\color{ecamred}\sf Divers}\medskip}\\
+			diff <path1> <path2> & affiche la différence entre les deux fichiers \\[1mm]
+			wc <path> & affiche le nombre de lignes, de mots et de caractères du fichier \code{path} \\[1mm]
+			lpr <path> & imprime le fichier \code{path} \\[1mm]
+			lpq & affiche les files d'impression \\[1mm]
+			wget <url> & télécharge le fichier \code{url} \\[1mm]
+			ping <url> & envoie une requête ping au serveur \code{url} \\[1mm]
+			ifconfig & montre la configuration des interfaces réseau\\[2mm]
+			cat > <path> & permet d'envoyer un texte dans le fichier \code{path} (ctrl+d pour enregistrer) \\[1mm]
+			cat >> <path> & permet d'envoyer un texte dans le fichier \code{path} à la suite du texte déjà présent.\\
+		\end{tabular}
+	\end{multicols}
+\end{document}
