@@ -19,7 +19,7 @@
 
 % Marges
 \setpapersize[landscape]{A4}
-\setmargins{3cm}{0cm}{25.5cm}{17cm}{0cm}{2cm}{0cm}{0cm}
+\setmargins{3cm}{0cm}{25.5cm}{16cm}{0cm}{3cm}{0cm}{0cm}
 
 % Style
 \pagestyle{empty}
@@ -166,13 +166,27 @@ contents={\begin{tikzpicture}[overlay]
 			|\quad rm -R <path> & supprime le dossier \code{path} \\[2mm]
 			find <path> -name <name> & cherche le fichier \code{name} dans le dossier \code{path}
 		\end{tabular}
+
 		
 		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		
 		\bigskip
 		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
+		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Redirection}\medskip}\\	
+		<cmd> > <path> & redirige le sortie standard de la commande \code{cmd} vers le fichier \code{path}\\
+		<cmd> ?> <path> & redirige la sortie standard \textbf{et} la sortie d'erreurs de la commande \code{cmd} vers le fichier 				\code{path}\\
+		<cmd> 1> <path1> 2> <path2>& redirige la sortie standard vers le fichier \code{path1} et la sortie d'erreurs vers le fichier 		\code{path2}\\
+		<cmd1> | <cmd2> & redirigie le resultat du programme \code{cmd1} vers le programme \code{cmd2}\\
+		\end{tabular}
+		
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				
+		
+		
+		\bigskip
+		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
 		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Gestion des permissions}\medskip}\\	
-		chmod & permet de changer les permissions d'un fichier\\[1mm]
+		chmod & change les permissions d'un fichier\\[1mm]
 		|\quad chmod +w <path> & ajoute les droits en écriture au fichier \code{path} à tout les utilisateurs\\
 		|\quad chmod g-x <path> & retire les droits d'exécution au fichier \code{path} pour le groupe seulement\\
 	 	 |\quad chmod UGA <path> & définit touts les droits sous forme octal au fichier \code{path} (ex : chmod 755 <path>)
@@ -181,21 +195,27 @@ contents={\begin{tikzpicture}[overlay]
 	 	 \item G : droits du groupe
 	 	 \item	 A : droits des autres
 		\end{itemize}	 	  \\
-		chown & permet de changer le propriétaire d'un fichier\\[2mm]
-		chgrp & permet de changer le groupe auquel appartient le fichier\\
+		chown & change le propriétaire d'un fichier\\[2mm]
+		chgrp & change le groupe auquel appartient le fichier\\
 		\end{tabular}
 		
 		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -		
 		
 		\bigskip
 		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
-		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Redirection}\medskip}\\	
-		<cmd> > <path> & redirige le sortie standard de la commande \code{cmd} vers le fichier \code{path}\\
-		<cmd> ?> <path> & redirige la sortie standard \textbf{et} la sortie d'erreurs de la commande \code{cmd} vers le fichier 				\code{path}\\
-		<cmd> 1> <path1> 2> <path2>& redirige la sortie standard vers le fichier \code{path1} et la sortie d'erreurs vers le fichier 		\code{path2}\\
+		\multicolumn{2}{l}{{\Large\color{ecamred}\sf Gestion des utilisateurs}\medskip}\\	
+		sudo & effectue une commande sous le nom du super utilisateur \textbf{root}\\[1mm]
+		adduser <user> & ajoute un utilisateur portant le nom \code{user}\\
+		|\quad <user> <group> & ajoute un utilisateur portant le nom \code{user} au groupe \code{group}\\
+		deluser <user> & supprime l'utilisateur portant le nom \code{user}\\[1mm]
+		groups <user> & liste les groupes auxquelles appartient \code{user}\\
+		groupadd <group> &ajoute un groupe portant le nom \code{group}\\
+		groupdel <group> & supprime le groupe portant le nom \code{group}\\
 		\end{tabular}
 		
-		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	
+			
+		
 		
 		\bigskip
 		\begin{tabular}{>{\tt\footnotesize}p{4cm}p{7.5cm}}
@@ -206,7 +226,11 @@ contents={\begin{tikzpicture}[overlay]
 			|\quad ps -f & affiche toutes les informations des processus \\[2mm]
 			top & liste dynamique des processus en cours d'exécution (\textit{quitter la liste avec la touche \code{q}}) \\[2mm]
 			kill <pid> & tue le processus numéro \code{pid} \\
-			|\quad kill -9 <pid> & tue violemment le processus \\
+			|\quad kill -9 <pid> & tue violemment le processus \\[2mm]
+			<cmd> \& & lance la commande \code{cmd} en arrière plan\\[2mm]
+			jobs & affiche la liste des jobs en cours\\[2mm]
+			fg \%<jobs> & passe la commande qui a pour numéro de job \code{jobs} au premier plan
+			
 		\end{tabular}
 		
 		% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -222,7 +246,10 @@ contents={\begin{tikzpicture}[overlay]
 			ping <url> & envoie une requête ping au serveur \code{url} \\[1mm]
 			ifconfig & montre la configuration des interfaces réseau\\[2mm]
 			cat > <path> & permet d'envoyer un texte dans le fichier \code{path} (ctrl+d pour enregistrer) \\[1mm]
-			cat >> <path> & permet d'envoyer un texte dans le fichier \code{path} à la suite du texte déjà présent.\\
+			cat >> <path> & permet d'envoyer un texte dans le fichier \code{path} à la suite du texte déjà présent.\\[2mm]
+			printenv & affiche la liste des variables.\\[2mm]
+			grep <regex> & affiche les lignes contenant  \code{regex}\\
+			|\quad <cmd> | grep <regex> &  affiche les lignes contenant  \code{regex} issu du résultat de \code{cmd}\\
 		\end{tabular}
 	\end{multicols}
 \end{document}
